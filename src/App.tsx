@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      Star Wars Universe 
+      <h1>Star Wars Universe </h1>
       </header>
       <Planets />
     </div>

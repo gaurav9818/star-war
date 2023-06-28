@@ -7,11 +7,11 @@ const People = (props:any)=> {
     return url2;
   }
   return (
-    <div className="Peoples">
+    <div className="Peoples" role="list">
         {
-          props.peoples && (props.peoples).map((people:any) => {
-           return (<div className="card">
-             <img src={getImageUrl(people.url)} loading="lazy"/>
+          props.peoples && (props.peoples).map((people:any,index:number) => {
+           return (<div className="card" key={index} role="listitem">
+             <img src={getImageUrl(people.url)} loading="lazy" alt={people.name}/>
              <h3>{people.name}</h3>
              </div>)
           })

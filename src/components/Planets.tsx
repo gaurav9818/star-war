@@ -116,8 +116,9 @@ function Planets() {
     ).then(texts => {
       setAllPeoples(texts);
       setTotalPage(0);
+      setLoader(0);
     })
-    setLoader(0);
+
   }
 
   //set current page state
@@ -128,24 +129,24 @@ function Planets() {
   return (
     <>
       <ErrorBoundary fallback={<div>Something went wrong</div>}>
-        <div className="searchWrapper">{make && <CreatableSelect onChange={handleChange} options={make} isClearable placeholder={'Search for planets'} formatCreateLabel={(input) => `Search for ${input}`} />}</div>
+      {totalPage > 0 && <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        pageCount={totalPage}
+        onPageChange={onPageChange}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
+      }
+      <div className="searchWrapper">{make && <CreatableSelect onChange={handleChange} options={make} isClearable placeholder={'Search for planets'} formatCreateLabel={(input) => `Search for ${input}`} />}</div>
         {!!loader && <Loading />}
         {!loader &&
-          <div className="con">
+          <div className="container">
             <People peoples={allPeoples} />
           </div>
-        }
-        {totalPage > 0 && <ReactPaginate
-          previousLabel={"← Previous"}
-          nextLabel={"Next →"}
-          pageCount={totalPage}
-          onPageChange={onPageChange}
-          containerClassName={"pagination"}
-          previousLinkClassName={"pagination__link"}
-          nextLinkClassName={"pagination__link"}
-          disabledClassName={"pagination__link--disabled"}
-          activeClassName={"pagination__link--active"}
-        />
         }
       </ErrorBoundary>
 
